@@ -1,0 +1,8 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/git/hub
+lib/git/hub.rb
+test/test_git/hub.rb

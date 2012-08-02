@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'git/hub'
+
+begin
+  puts Git::Hub.parse ARGV.first
+rescue Git::Hub::Error => e
+  fatal e.message
+end
