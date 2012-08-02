@@ -10,6 +10,12 @@ creates links to github from user input.
 
 * does not verify input
 
+For bash completion, add this to your profile:
+  _git_hub() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    __git_complete_revlist_file
+  }
+
 == REQUIREMENTS:
 
 * git
