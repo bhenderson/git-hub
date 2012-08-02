@@ -25,8 +25,8 @@ class TestGit::TestHub < Test::Unit::TestCase
   end
 
   def test_converted_url_unkown
+    set_url 'unknown'
     e = assert_raises Git::Hub::Error do
-      set_url 'unknown'
       @gh.http_url
     end
     assert_equal 'unprocessable repo url: unknown', e.message
@@ -51,9 +51,11 @@ class TestGit::TestHub < Test::Unit::TestCase
 
   def util_git_dir
     set_url nil
-    Dir.mktmpdir 'git_hub' do
-      %x'git init .; git config remote.origin.url #{@url}'
-      yield
+    Dir.mktmpdir 'git_hub' do |tmpdir|
+      Dir.chdir tmpdir do
+        %x'git init .; git config remote.origin.url #{@url}'
+        yield
+      end
     end
   end
 end

@@ -10,10 +10,6 @@ class Git::Hub
     new.parse input
   end
 
-  def initialize dir = Dir.pwd
-    @dir = dir
-  end
-
   # convert: git@github.com:user/repo.git
   # to: https://github.com/user/repo
   def http_url
@@ -43,9 +39,7 @@ class Git::Hub
 
   def url
     return @url if @url
-    Dir.chdir @dir do
-      @url = `git config remote.origin.url`.chomp!
-    end
+    @url = `git config remote.origin.url`.chomp!
   end
 
   private
