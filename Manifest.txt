@@ -1,8 +1,7 @@
-.autotest
 History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/git/hub
+bin/git-hub
 lib/git/hub.rb
-test/test_git/hub.rb
+test/git/test_hub.rb
