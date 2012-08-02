@@ -33,9 +33,10 @@ class TestGit::TestHub < Test::Unit::TestCase
   end
 
   def test_parse
-    def @gh.head() 'HEAD' end
+    def @gh.rev_parse(a) a end
 
     assert_equal "#{@http_url}/commit/123", @gh.parse('123')
+    assert_equal "#{@http_url}/commit/HEAD%5E", @gh.parse('HEAD^')
     assert_equal "#{@http_url}/pulls/42", @gh.parse('#42')
     assert_equal "#{@http_url}/pulls", @gh.parse('pulls')
     assert_equal "#{@http_url}/compare/123...124", @gh.parse('123..124')

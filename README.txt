@@ -4,23 +4,15 @@
 
 == DESCRIPTION:
 
-FIX (describe your package)
+creates links to github from user input.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
-
-== SYNOPSIS:
-
-  FIX (code sample of usage)
+* does not verify input
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
-
-== INSTALL:
-
-* FIX (sudo gem install, anything else)
+* git
 
 == DEVELOPERS:
 

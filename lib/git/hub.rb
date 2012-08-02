@@ -1,3 +1,4 @@
+require 'uri'
 module Git; end
 
 class Git::Hub
@@ -22,8 +23,9 @@ class Git::Hub
     case input
     when /(\.{2,3})/
       first, last = input.split($1, 2)
-      first = 'HEAD' if first.empty?
-      last  = 'HEAD' if last.empty?
+      # we want to display local head, not remote head.
+      first = rev_parse('HEAD') if first.empty?
+      last  = rev_parse('HEAD') if last.empty?
       range = [first, last].join '...'
       http_url_for 'compare', range
     when /\//
@@ -33,7 +35,7 @@ class Git::Hub
     when nil
       http_url_for
     else
-      http_url_for 'commit', input
+      http_url_for 'commit', rev_parse(input)
     end
   end
 
@@ -44,11 +46,13 @@ class Git::Hub
 
   private
 
-  def head
-    `git rev-parse HEAD`.chomp! || 'HEAD'
+  def rev_parse arg
+    `git rev-parse --quiet --verify #{arg}`.chomp!
   end
 
   def http_url_for *args
+    # escape is deprecated, but what do I replace it with?
+    args.map!{|part| URI.escape part if part}
     [http_url, *args].compact.join '/'
   end
 end
