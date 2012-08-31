@@ -34,7 +34,7 @@ class Git::Hub
       cmd  = 'compare'
       rest = range
     when /\//
-      cmd  = 'master'
+      cmd  = 'tree/master'
       rest = input.sub(/\A\/?/, '')
     when /^(?:#|pulls)(\d+)?/
       cmd  = 'pulls'
