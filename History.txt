@@ -1,3 +1,16 @@
+=== 1.0.1 / 2012-08-31
+
+* 7 unknowns:
+
+  * Adds bash completion help in readme.
+  * Adds rev parsing.
+  * Fix bug when calling sub! on frozen string. Make http_url_for 'better'. Silence warnings.
+  * Initial.
+  * Removed need for @dir.
+  * Removes rev_parse method. Refactors #parse(). Adds some tests.
+  * Updates history.
+
+
 === 1.0.0 / 2012-08-02
 
 * 1 major enhancement
