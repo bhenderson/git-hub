@@ -1,4 +1,4 @@
-require 'uri'
+require 'cgi'
 module Git; end
 
 class Git::Hub
@@ -8,7 +8,11 @@ class Git::Hub
   class Error < RuntimeError; end
 
   def self.parse *args
-    new.parse *args
+    new.parse(*args)
+  end
+
+  def initialize
+    @http_url = nil
   end
 
   # convert: git@github.com:user/repo.git
@@ -31,7 +35,7 @@ class Git::Hub
       rest = range
     when /\//
       cmd  = 'master'
-      rest = input.sub! /\A\/?/, ''
+      rest = input.sub(/\A\/?/, '')
     when /^(?:#|pulls)(\d+)?/
       cmd  = 'pulls'
       rest = $1
@@ -51,8 +55,7 @@ class Git::Hub
   private
 
   def http_url_for *args
-    # escape is deprecated, but what do I replace it with?
-    args.map!{|part| URI.escape part if part}
-    [http_url, *args].compact.join '/'
+    args = args.compact.join('/').split('/').map!{|p| CGI.escape p}
+    [http_url, *args].join '/'
   end
 end
