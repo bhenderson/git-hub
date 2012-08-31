@@ -2,7 +2,7 @@ require 'cgi'
 module Git; end
 
 class Git::Hub
-  VERSION = '1.0.1'
+  VERSION = '1.0.2'
   GIT_REGEX = %r'\A(?:.+)(?:://|@)(.+)(?::|/)(.+)/(.+)(?:.git)\z'
 
   class Error < RuntimeError; end
