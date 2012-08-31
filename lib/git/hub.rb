@@ -20,7 +20,7 @@ class Git::Hub
   def http_url
     return @http_url if @http_url
     raise Error, "unprocessable repo url: #{url}" unless url =~ GIT_REGEX
-    @http_url = "https://#{$1}/#{$2}/#{$3}"
+    @http_url = "http://#{$1}/#{$2}/#{$3}"
   end
 
   def parse input = nil

@@ -8,7 +8,7 @@ class TestGit::TestHub < Test::Unit::TestCase
   def setup
     @gh  = Git::Hub.new
     @url = 'git@github.com:user/repo.git'
-    @http_url = 'https://github.com/user/repo'
+    @http_url = 'http://github.com/user/repo'
     set_url
   end
 
@@ -23,7 +23,7 @@ class TestGit::TestHub < Test::Unit::TestCase
   def test_converted_url
     assert_equal @http_url, @gh.http_url
 
-    set_url 'https://github.com/user/repo.git'
+    set_url 'http://github.com/user/repo.git'
     assert_equal @http_url, @gh.http_url
 
     set_url 'git://github.com/user/repo.git'
