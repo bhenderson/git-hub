@@ -23,7 +23,10 @@ class Git::Hub
     @http_url = "http://#{$1}/#{$2}/#{$3}"
   end
 
-  def parse input = nil
+  def parse *args
+    input = args.shift
+    final = ''
+
     case input
     when /(\.{2,3})/
       first, last = input.split($1, 2)
@@ -36,6 +39,7 @@ class Git::Hub
     when /\//
       cmd  = 'tree/master'
       rest = input.sub(/\A\/?/, '')
+      final << "#L" << args.join unless args.empty?
     when /^(?:#|pulls)(\d+)?/
       cmd  = 'pulls'
       rest = $1
@@ -45,7 +49,7 @@ class Git::Hub
       rest = input
     end
 
-    http_url_for cmd, *rest
+    http_url_for(cmd, *rest) << final
   end
 
   def url

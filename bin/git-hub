@@ -3,7 +3,7 @@
 require 'git/hub'
 
 begin
-  puts Git::Hub.parse ARGV.first
+  puts Git::Hub.parse *ARGV
 rescue Git::Hub::Error => e
   fatal e.message
 end

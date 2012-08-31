@@ -39,16 +39,17 @@ class TestGit::TestHub < Test::Unit::TestCase
   end
 
   def test_parse
-    assert_equal "#{@http_url}/commit/123",             @gh.parse('123')
-    assert_equal "#{@http_url}/commit/HEAD%5E",         @gh.parse('HEAD^')
-    assert_equal "#{@http_url}/pulls/42",               @gh.parse('#42')
-    assert_equal "#{@http_url}/pulls",                  @gh.parse('pulls')
-    assert_equal "#{@http_url}/compare/123...124",      @gh.parse('123..124')
-    assert_equal "#{@http_url}/compare/HEAD...124",     @gh.parse('..124')
-    assert_equal "#{@http_url}/compare/123...HEAD",     @gh.parse('123..')
-    assert_equal "#{@http_url}/tree/master/lib/123.rb", @gh.parse('/lib/123.rb')
-    assert_equal "#{@http_url}/tree/master/lib/123.rb", @gh.parse('lib/123.rb')
-    assert_equal @http_url,                             @gh.parse()
+    assert_equal "#{@http_url}/commit/123",                  @gh.parse('123')
+    assert_equal "#{@http_url}/commit/HEAD%5E",              @gh.parse('HEAD^')
+    assert_equal "#{@http_url}/pulls/42",                    @gh.parse('#42')
+    assert_equal "#{@http_url}/pulls",                       @gh.parse('pulls')
+    assert_equal "#{@http_url}/compare/123...124",           @gh.parse('123..124')
+    assert_equal "#{@http_url}/compare/HEAD...124",          @gh.parse('..124')
+    assert_equal "#{@http_url}/compare/123...HEAD",          @gh.parse('123..')
+    assert_equal "#{@http_url}/tree/master/lib/123.rb",      @gh.parse('/lib/123.rb')
+    assert_equal "#{@http_url}/tree/master/lib/123.rb",      @gh.parse('lib/123.rb')
+    assert_equal "#{@http_url}/tree/master/lib/123.rb#L123", @gh.parse('lib/123.rb', '123')
+    assert_equal @http_url,                                  @gh.parse()
   end
 
   def set_url url = @url
